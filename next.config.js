@@ -1,14 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: process.env.NODE_ENV === 'production' ? 'export' : undefined,
+  output: 'export',
   images: {
     unoptimized: true,
   },
-  ...(process.env.NODE_ENV === 'production' ? {
-    basePath: '/kilvish25.github.io',
-    assetPrefix: '/kilvish25.github.io/',
-    trailingSlash: true,
-  } : {}),
+  basePath: '',
+  assetPrefix: '',
 };
 
 module.exports = nextConfig;
