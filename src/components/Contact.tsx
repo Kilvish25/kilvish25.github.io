@@ -10,6 +10,10 @@ const Contact = () => {
       initEmailJS();
     } catch (error) {
       console.error('Failed to initialize EmailJS:', error);
+      setStatus(prev => ({
+        ...prev,
+        error: 'Failed to initialize email service. Please try again later.'
+      }));
     }
   }, []);
 
@@ -30,6 +34,10 @@ const Contact = () => {
       ...prev,
       [name]: value
     }));
+    // Clear error when user starts typing
+    if (status.error) {
+      setStatus(prev => ({ ...prev, error: null }));
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -58,10 +66,14 @@ const Contact = () => {
       }, 5000);
     } catch (error) {
       console.error('Failed to send message:', error);
+      const errorMessage = error instanceof Error 
+        ? error.message
+        : 'Failed to send message. Please try again later.';
+      
       setStatus({
         submitting: false,
         submitted: false,
-        error: error instanceof Error ? error.message : 'Failed to send message. Please try again.'
+        error: errorMessage
       });
     }
   };
