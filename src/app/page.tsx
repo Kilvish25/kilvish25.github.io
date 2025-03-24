@@ -14,7 +14,7 @@ import Contact from "../components/Contact";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-white dark:bg-gray-900">
       <Navbar />
       <Hero />
       <About />
@@ -25,17 +25,6 @@ export default function Home() {
       <Achievements />
       <Blogs />
       <Contact />
-      <div className="text-center p-8 bg-gray-100">
-        <p className="max-w-md mx-auto text-gray-600">
-          All components have been added successfully!
-        </p>
-        <button 
-          onClick={() => alert("All components loaded successfully")}
-          className="mt-8 px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700"
-        >
-          Click to test
-        </button>
-      </div>
     </main>
   );
 }

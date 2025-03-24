@@ -13,16 +13,27 @@ const Navbar = () => {
       setIsScrolled(window.scrollY > 20);
     };
 
-    // Check system preference for dark mode
-    setIsDarkMode(window.matchMedia('(prefers-color-scheme: dark)').matches);
+    // Check system preference and saved preference for dark mode
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    setIsDarkMode(savedTheme === 'dark' || (!savedTheme && prefersDark));
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-    document.documentElement.classList.toggle('dark');
+    const newDarkMode = !isDarkMode;
+    setIsDarkMode(newDarkMode);
+    
+    // Update document class and localStorage
+    if (newDarkMode) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    }
   };
 
   const navLinks = [
