@@ -1,9 +1,71 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaGithub, FaLinkedin, FaTwitter, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
+import { initEmailJS, sendEmail } from '../utils/emailjs';
 
 const Contact = () => {
+  useEffect(() => {
+    try {
+      initEmailJS();
+    } catch (error) {
+      console.error('Failed to initialize EmailJS:', error);
+    }
+  }, []);
+
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+  const [status, setStatus] = useState({
+    submitting: false,
+    submitted: false,
+    error: null as string | null
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setStatus({ submitting: true, submitted: false, error: null });
+
+    try {
+      if (!process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 
+          !process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || 
+          !process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY) {
+        throw new Error('Email service is not configured properly');
+      }
+
+      await sendEmail(formData);
+      
+      setStatus({
+        submitting: false,
+        submitted: true,
+        error: null
+      });
+      setFormData({ name: '', email: '', message: '' });
+
+      // Reset success message after 5 seconds
+      setTimeout(() => {
+        setStatus(prev => ({ ...prev, submitted: false }));
+      }, 5000);
+    } catch (error) {
+      console.error('Failed to send message:', error);
+      setStatus({
+        submitting: false,
+        submitted: false,
+        error: error instanceof Error ? error.message : 'Failed to send message. Please try again.'
+      });
+    }
+  };
+
   const socialLinks = [
     {
       name: 'GitHub',
@@ -44,7 +106,7 @@ const Contact = () => {
             <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">
               Send Me a Message
             </h3>
-            <form>
+            <form onSubmit={handleSubmit}>
               <div className="mb-6">
                 <label
                   htmlFor="name"
@@ -56,9 +118,12 @@ const Contact = () => {
                   type="text"
                   id="name"
                   name="name"
+                  value={formData.name}
+                  onChange={handleChange}
                   className="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   placeholder="John Doe"
                   required
+                  disabled={status.submitting}
                 />
               </div>
               <div className="mb-6">
@@ -72,9 +137,12 @@ const Contact = () => {
                   type="email"
                   id="email"
                   name="email"
+                  value={formData.email}
+                  onChange={handleChange}
                   className="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   placeholder="john@example.com"
                   required
+                  disabled={status.submitting}
                 />
               </div>
               <div className="mb-6">
@@ -87,17 +155,33 @@ const Contact = () => {
                 <textarea
                   id="message"
                   name="message"
+                  value={formData.message}
+                  onChange={handleChange}
                   rows={5}
                   className="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   placeholder="I'd like to discuss a project..."
                   required
+                  disabled={status.submitting}
                 ></textarea>
               </div>
+              {status.error && (
+                <div className="mb-4 text-red-600 dark:text-red-400">
+                  {status.error}
+                </div>
+              )}
+              {status.submitted && (
+                <div className="mb-4 text-green-600 dark:text-green-400">
+                  Message sent successfully!
+                </div>
+              )}
               <button
                 type="submit"
-                className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 px-6 rounded-lg shadow-md"
+                disabled={status.submitting}
+                className={`w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 px-6 rounded-lg shadow-md transition-all duration-200 ${
+                  status.submitting ? 'opacity-75 cursor-not-allowed' : ''
+                }`}
               >
-                Send Message
+                {status.submitting ? 'Sending...' : 'Send Message'}
               </button>
             </form>
           </div>
