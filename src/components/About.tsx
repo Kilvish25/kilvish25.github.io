@@ -1,45 +1,45 @@
 'use client';
 
 import React from 'react';
-import { FaCode, FaLaptopCode, FaMobileAlt, FaServer, FaUsers, FaLightbulb } from 'react-icons/fa';
+import { FaCode, FaChartLine, FaLaptopCode, FaServer, FaBrain, FaBasketballBall } from 'react-icons/fa';
 
 const About = () => {
   const features = [
     {
-      icon: <FaCode className="w-8 h-8 text-indigo-600" />,
-      title: 'Clean Code',
+      icon: <FaChartLine className="w-8 h-8 text-indigo-600" />,
+      title: 'Quantitative Finance',
       description:
-        'I write clean, maintainable, and efficient code following best practices and industry standards.',
+        'Passionate about financial markets and building sophisticated trading systems using technology and data science.',
+    },
+    {
+      icon: <FaCode className="w-8 h-8 text-indigo-600" />,
+      title: 'Complex Problem Solving',
+      description:
+        'I thrive on tackling complex technical challenges and building scalable solutions that make a real impact.',
     },
     {
       icon: <FaLaptopCode className="w-8 h-8 text-indigo-600" />,
-      title: 'Modern Technologies',
+      title: 'Competitive Programming',
       description:
-        'I stay updated with the latest technologies and frameworks to build cutting-edge applications.',
-    },
-    {
-      icon: <FaMobileAlt className="w-8 h-8 text-indigo-600" />,
-      title: 'Responsive Design',
-      description:
-        'I create responsive designs that work flawlessly across all devices and screen sizes.',
+        'Active participant in competitive programming, constantly honing my algorithmic and problem-solving skills.',
     },
     {
       icon: <FaServer className="w-8 h-8 text-indigo-600" />,
-      title: 'Backend Development',
+      title: 'System Architecture',
       description:
-        'I develop robust backend systems with secure APIs and efficient database management.',
+        'Experienced in designing and implementing distributed systems and microservices architectures.',
     },
     {
-      icon: <FaUsers className="w-8 h-8 text-indigo-600" />,
-      title: 'Team Collaboration',
+      icon: <FaBrain className="w-8 h-8 text-indigo-600" />,
+      title: 'AI Integration',
       description:
-        'I thrive in collaborative environments and effectively communicate complex technical concepts.',
+        'Skilled in integrating AI/ML solutions for market analysis and automated decision-making systems.',
     },
     {
-      icon: <FaLightbulb className="w-8 h-8 text-indigo-600" />,
-      title: 'Problem Solving',
+      icon: <FaBasketballBall className="w-8 h-8 text-indigo-600" />,
+      title: 'Sports Enthusiast',
       description:
-        'I enjoy tackling complex problems and finding elegant solutions through creative thinking.',
+        'Passionate about basketball and badminton, bringing the same competitive spirit to both sports and coding.',
     },
   ];
 
@@ -51,16 +51,16 @@ const About = () => {
             About Me
           </h2>
           <p className="text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            I'm Dharmendra Ahirwar, also known as Kilvish in the tech community. I'm a passionate Software Engineer with a focus on creating clean, efficient, and user-friendly applications.
+            I'm Dharmendra Ahirwar, a Software Engineer with a passion for building impactful technology solutions in quantitative finance and distributed systems.
           </p>
         </div>
 
         <div className="max-w-3xl mx-auto mb-16">
           <p className="text-gray-700 dark:text-gray-300 mb-6">
-            With a strong foundation in both frontend and backend technologies, I specialize in building comprehensive software solutions that solve real-world problems. My journey in software development began with a curiosity about how applications work, which evolved into a passion for creating them myself.
+            Currently working with the founding team at Hillroute Capital, a Crypto Hedge Fund, where I'm responsible for building critical trading infrastructure and market analysis systems. My expertise spans real-time applications, parallel programming, and integrating AI for market sentiment analysis.
           </p>
           <p className="text-gray-700 dark:text-gray-300">
-            I believe in continuous learning and regularly explore new technologies to enhance my skill set. When I'm not coding, you might find me reading tech blogs, contributing to open-source projects, or mentoring aspiring developers.
+            With a B.Tech in Mathematics and Computing from IIT Delhi, I combine strong technical skills with a deep interest in quantitative finance. When I'm not coding or analyzing markets, you'll find me on the basketball court or engaging in competitive programming challenges.
           </p>
         </div>
 

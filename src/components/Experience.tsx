@@ -1,47 +1,54 @@
 'use client';
 
 import React from 'react';
-import { FaBriefcase, FaCalendarAlt, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaBriefcase, FaMapMarkerAlt, FaCalendarAlt } from 'react-icons/fa';
 
 const Experience = () => {
   const workHistory = [
     {
-      title: 'Senior Software Engineer',
-      company: 'Tech Solutions Inc.',
-      location: 'Bangalore, India',
-      period: 'Jan 2022 - Present',
-      description: 'Leading the development of enterprise web applications using React, Next.js, and Node.js. Implementing CI/CD pipelines and mentoring junior developers. Reduced application load time by 40% through code optimization.',
-      responsibilities: [
-        'Architected and developed scalable frontend solutions',
-        'Implemented authentication and authorization systems',
-        'Optimized application performance and reduced load times',
-        'Mentored junior developers and conducted code reviews'
-      ]
-    },
-    {
       title: 'Software Engineer',
-      company: 'Digital Innovations Ltd.',
-      location: 'Hyderabad, India',
-      period: 'Jun 2019 - Dec 2021',
-      description: 'Developed responsive web applications using React, TypeScript, and Redux. Collaborated with UX designers and backend teams to implement new features and improve user experience.',
-      responsibilities: [
-        'Built reusable UI components using React and styled-components',
-        'Implemented state management using Redux and Context API',
-        'Created unit tests with Jest and React Testing Library',
-        'Participated in agile development process and sprint planning'
+      company: 'Hillroute Capital',
+      location: 'Noida, India',
+      period: 'August 2023 - Present',
+      description: `Working with the founding team to build critical trading infrastructure and market analysis systems. 
+      Developed real-time applications using websockets and parallel programming for market monitoring. 
+      Implemented market sentiment analysis using AI/ML to generate actionable trading insights. 
+      Technologies: Python, PostgreSQL, Redis, AWS, WebSockets, Machine Learning.`,
+      achievements: [
+        'Built real-time market monitoring applications with parallel processing capabilities',
+        'Integrated AI/ML models for market sentiment analysis and trading signals',
+        'Developed scalable infrastructure for high-frequency trading operations',
+        'Implemented robust data pipelines for market data processing and analysis'
       ]
     },
     {
-      title: 'Junior Developer',
-      company: 'WebTech Solutions',
-      location: 'Pune, India',
-      period: 'Aug 2017 - May 2019',
-      description: 'Started as an intern and quickly progressed to a full-time role. Worked on frontend development using HTML, CSS, JavaScript, and React. Assisted in developing and maintaining company websites and web applications.',
-      responsibilities: [
-        'Developed responsive user interfaces using HTML, CSS, and JavaScript',
-        'Assisted in migrating legacy applications to React',
-        'Fixed bugs and implemented new features',
-        'Collaborated with team members on code reviews and debugging'
+      title: 'Senior Software Engineer',
+      company: 'Helloverify India Private Limited',
+      location: 'India',
+      period: 'July 2022 - August 2023',
+      description: `Led development of scalable software systems using Python and Django, achieving 200% efficiency improvement. 
+      Architected microservices to resolve scaling issues and reduce downtime by 40%. 
+      Implemented comprehensive security measures and automated CI/CD pipelines.`,
+      achievements: [
+        'Optimized database schemas improving performance by 40%',
+        'Integrated SonarQube and SOOS for security assessments',
+        'Reduced deployment time by 50% through CI/CD automation',
+        'Improved server performance by 70% using Gunicorn, Nginx, Celery, and Redis'
+      ]
+    },
+    {
+      title: 'Software Engineer Intern',
+      company: 'Pirates India',
+      location: 'India',
+      period: 'May 2020 - August 2020',
+      description: `Designed scalable database schemas handling 50,000+ daily transactions. 
+      Engineered a Python-based recommendation engine using machine learning. 
+      Collaborated with multiple stakeholders to improve development efficiency.`,
+      achievements: [
+        'Reduced query time by 30% for 100,000+ records',
+        'Improved content relevance boosting user read-time by 25-30%',
+        'Reduced development cycle time by 20%',
+        'Collaborated across 3 departments to streamline development processes'
       ]
     }
   ];
@@ -54,7 +61,7 @@ const Experience = () => {
             Professional Experience
           </h2>
           <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            My professional journey and the companies I've had the pleasure to work with.
+            My journey in software engineering, from internship to building critical financial systems.
           </p>
         </div>
 
@@ -93,20 +100,15 @@ const Experience = () => {
                     </div>
                   </div>
                   
-                  <p className="text-gray-600 dark:text-gray-400 mb-4">
+                  <p className="text-gray-600 dark:text-gray-400 mb-4 whitespace-pre-line">
                     {job.description}
                   </p>
-                  
-                  <div>
-                    <h5 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
-                      Key Responsibilities:
-                    </h5>
-                    <ul className="list-disc list-inside text-gray-600 dark:text-gray-400 pl-2">
-                      {job.responsibilities.map((responsibility, idx) => (
-                        <li key={idx} className="mb-1">{responsibility}</li>
-                      ))}
-                    </ul>
-                  </div>
+
+                  <ul className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400">
+                    {job.achievements.map((achievement, i) => (
+                      <li key={i}>{achievement}</li>
+                    ))}
+                  </ul>
                 </div>
               </div>
             ))}
