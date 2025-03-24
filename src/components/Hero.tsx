@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { FaGithub, FaLinkedin, FaTwitter, FaEnvelope } from 'react-icons/fa';
+import Image from 'next/image';
 
 const Hero = () => {
   const socialLinks = [
@@ -80,14 +81,16 @@ const Hero = () => {
             </div>
           </div>
           <div className="md:w-1/2 flex justify-center">
-            <div className="w-64 h-64 md:w-80 md:h-80 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden 
+            <div className="w-64 h-64 md:w-80 md:h-80 relative rounded-full overflow-hidden 
                           shadow-xl transform hover:scale-105 transition-all duration-300">
-              {/* Replace with your profile image */}
-              <div className="w-full h-full bg-gradient-to-br from-indigo-500 to-purple-600 
-                            dark:from-indigo-600 dark:to-purple-700 flex items-center justify-center 
-                            text-white text-4xl font-bold transition-colors duration-300">
-                DA
-              </div>
+              <Image
+                src="/images/profile.png"
+                alt="Dharmendra Ahirwar"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 256px, 320px"
+                priority
+              />
             </div>
           </div>
         </div>
