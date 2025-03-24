@@ -6,7 +6,8 @@ const nextConfig = {
   },
   ...(process.env.NODE_ENV === 'production' ? {
     basePath: '/kilvish25.github.io',
-    assetPrefix: '/kilvish25.github.io',
+    assetPrefix: '/kilvish25.github.io/',
+    trailingSlash: true,
   } : {}),
 };
 
