@@ -3,7 +3,12 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [ master ]
-  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: write
+  pages: write
+  id-token: write
 
 jobs:
   build-and-deploy:
@@ -12,27 +17,26 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "18"
-          cache: 'npm'
+          node-version: '20'
 
       - name: Install dependencies
         run: |
+          npm cache clean --force
+          rm -rf node_modules package-lock.json
           npm install
-          npm install --save-dev typescript@5.3.3 @types/react@18.2.64 @types/node@20.11.25 @types/react-dom@18.2.21
+          npm install --save-dev typescript@5 @types/react @types/node @types/react-dom
+          npm install
 
       - name: Build
         run: npm run build
 
-      - name: Add .nojekyll file
-        run: |
-          touch out/.nojekyll
-          cp README.md out/
-
-      - name: Deploy
+      - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: out
-          branch: gh-pages 
+          branch: gh-pages
+          token: ${{ secrets.GITHUB_TOKEN }}
+          clean: true 
