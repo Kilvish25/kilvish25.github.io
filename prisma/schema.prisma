@@ -1,0 +1,75 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String
+  role      Role     @default(ADMIN)
+  blogs     Blog[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ContentBlock {
+  id          String           @id @default(cuid())
+  identifier  String           @unique
+  content     String
+  section     String
+  type        ContentType
+  metadata    String?         // JSON string for SQLite compatibility
+  order       Int?
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  history     ContentHistory[]
+}
+
+model ContentHistory {
+  id              String       @id @default(cuid())
+  contentBlock    ContentBlock @relation(fields: [contentBlockId], references: [id])
+  contentBlockId  String
+  content         String
+  updatedBy       String
+  updatedAt       DateTime     @default(now())
+}
+
+model Blog {
+  id        String   @id @default(cuid())
+  title     String
+  content   String
+  slug      String   @unique
+  status    Status   @default(DRAFT)
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum ContentType {
+  TEXT
+  RICH_TEXT
+  LIST
+  CARD
+  TIMELINE_ITEM
+}
+
+enum Role {
+  ADMIN
+  VIEWER
+}
+
+enum Status {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+} 

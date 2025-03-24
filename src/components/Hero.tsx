@@ -3,6 +3,7 @@
 import React from 'react';
 import { FaGithub, FaLinkedin, FaTwitter, FaEnvelope } from 'react-icons/fa';
 import Image from 'next/image';
+import EditableContent from './admin/EditableContent';
 
 const Hero = () => {
   const socialLinks = [
@@ -35,16 +36,27 @@ const Hero = () => {
       <div className="container mx-auto px-4 py-16 md:px-8 lg:px-16">
         <div className="flex flex-col md:flex-row items-center">
           <div className="md:w-1/2 mb-12 md:mb-0">
-            <h2 className="text-2xl font-semibold text-indigo-600 dark:text-indigo-400 mb-4 transition-colors duration-300">
-              Hello, I'm Dharmendra Ahirwar
-            </h2>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6 transition-colors duration-300">
-              Software Engineer
-            </h1>
-            <p className="text-lg text-gray-700 dark:text-gray-200 mb-8 transition-colors duration-300">
-              I build beautiful, responsive, and user-friendly websites and applications.
-              Passionate about creating exceptional digital experiences with modern technologies.
-            </p>
+            <EditableContent
+              identifier="hero-title"
+              type="TEXT"
+              defaultContent="Hello, I'm Dharmendra Ahirwar"
+              className="text-2xl font-semibold text-indigo-600 dark:text-indigo-400 mb-4 transition-colors duration-300"
+              as="h2"
+            />
+            <EditableContent
+              identifier="hero-subtitle"
+              type="TEXT"
+              defaultContent="Software Engineer"
+              className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6 transition-colors duration-300"
+              as="h1"
+            />
+            <EditableContent
+              identifier="hero-description"
+              type="TEXT"
+              defaultContent="I build beautiful, responsive, and user-friendly websites and applications. Passionate about creating exceptional digital experiences with modern technologies."
+              className="text-lg text-gray-700 dark:text-gray-200 mb-8 transition-colors duration-300"
+              as="p"
+            />
             <div className="flex space-x-4 mb-8">
               {socialLinks.map((link) => (
                 <a
@@ -84,7 +96,7 @@ const Hero = () => {
             <div className="w-64 h-64 md:w-80 md:h-80 relative rounded-full overflow-hidden 
                           shadow-xl transform hover:scale-105 transition-all duration-300">
               <Image
-                src="/images/profile.png"
+                src="/images/profile.JPG"
                 alt="Dharmendra Ahirwar"
                 fill
                 className="object-cover"
