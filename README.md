@@ -57,26 +57,74 @@ Visit the live site: [https://kilvish25.github.io](https://kilvish25.github.io)
 
 ## 🚀 Deployment
 
-The site is automatically deployed to GitHub Pages using GitHub Actions when changes are pushed to the master branch.
+### Automatic Deployment (GitHub Actions)
+The site automatically deploys to GitHub Pages when changes are pushed to the master branch. Just push your changes:
+```bash
+git add .
+git commit -m "Your commit message"
+git push origin master
+```
 
-### Manual Deployment Steps
+### Manual Deployment
 
-1. **Build the project**
+You can deploy manually using either the provided script or step-by-step commands.
+
+#### Using Deployment Script
+
+1. **Make your changes and test locally**
    ```bash
+   # Test in development
+   npm run dev
+
+   # Build and test production version
+   npm run build
+   npx serve out
+   ```
+
+2. **Run the deployment script**
+   ```bash
+   ./deploy.sh
+   ```
+
+#### Manual Step-by-Step Deployment
+
+1. **Clean and build the project**
+   ```bash
+   # Clean previous build
+   rm -rf out
+   
+   # Build project
    npm run build
    ```
 
-2. **Test the production build locally**
+2. **Prepare for deployment**
    ```bash
-   npm run start
+   # Navigate to build output
+   cd out
+   
+   # Create .nojekyll file
+   touch .nojekyll
+   
+   # Initialize git
+   git init
+   
+   # Stage all files
+   git add .
+   
+   # Commit changes
+   git commit -m "Manual deployment"
    ```
 
-3. **Push changes to trigger deployment**
+3. **Deploy to GitHub Pages**
    ```bash
-   git add .
-   git commit -m "Your commit message"
-   git push origin master
+   # Force push to gh-pages branch
+   git push -f git@github.com:Kilvish25/kilvish25.github.io.git master:gh-pages
    ```
+
+4. **Verify Deployment**
+   - Wait a few minutes for GitHub Pages to update
+   - Visit https://kilvish25.github.io in an incognito window
+   - Check browser console for any errors
 
 ## 📝 Environment Variables
 
@@ -105,6 +153,7 @@ The site is automatically deployed to GitHub Pages using GitHub Actions when cha
 - `tailwind.config.ts`: Tailwind CSS configuration
 - `postcss.config.js`: PostCSS configuration
 - `tsconfig.json`: TypeScript configuration
+- `deploy.sh`: Manual deployment script
 
 ## 🔧 Scripts
 
@@ -113,6 +162,7 @@ The site is automatically deployed to GitHub Pages using GitHub Actions when cha
 - `npm run start`: Start production server
 - `npm run lint`: Run ESLint
 - `npm run format`: Format code with Prettier
+- `./deploy.sh`: Manual deployment to GitHub Pages
 
 ## 📄 License
 
