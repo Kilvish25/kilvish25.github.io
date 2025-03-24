@@ -32,10 +32,12 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v4
         
-      - name: Clean install dependencies
+      - name: Install dependencies
         run: |
           npm cache clean --force
-          rm -rf node_modules
+          rm -rf node_modules package-lock.json
+          npm install
+          npm install --save-dev typescript@5 @types/react @types/node @types/react-dom
           npm install
       
       - name: Build with Next.js
