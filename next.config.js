@@ -4,8 +4,8 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  basePath: '',
-  assetPrefix: '',
+  basePath: '/kilvish25.github.io',
+  assetPrefix: '/kilvish25.github.io',
 };
 
 module.exports = nextConfig;

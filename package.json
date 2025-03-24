@@ -4,13 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && touch out/.nojekyll && echo \"Personal portfolio site for Dharmendra Ahirwar (kilvish25)\" > out/README.md",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "export": "next build",
     "clean": "rm -rf .next out",
-    "rebuild": "npm run clean && npm run build",
-    "deploy": "next build && touch out/.nojekyll && echo \"Personal portfolio site for Dharmendra Ahirwar (kilvish25)\" > out/README.md && git add out/ -f && git commit -m \"Deploy to GitHub Pages\" && git subtree push --prefix out origin gh-pages"
+    "rebuild": "npm run clean && npm run build"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
