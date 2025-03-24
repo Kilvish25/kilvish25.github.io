@@ -1,16 +1,35 @@
 import emailjs from '@emailjs/browser';
 
+const logEnvStatus = () => {
+  const envVars = {
+    PUBLIC_KEY: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY,
+    SERVICE_ID: process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
+    TEMPLATE_ID: process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID
+  };
+
+  console.log('Environment Variables Status:', {
+    PUBLIC_KEY: envVars.PUBLIC_KEY ? '✓' : '✗',
+    SERVICE_ID: envVars.SERVICE_ID ? '✓' : '✗',
+    TEMPLATE_ID: envVars.TEMPLATE_ID ? '✓' : '✗'
+  });
+
+  return envVars;
+};
+
 // Initialize EmailJS
 export const initEmailJS = () => {
-  if (!process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY) {
-    console.error('EmailJS public key is missing');
-    return;
+  const envVars = logEnvStatus();
+  
+  if (!envVars.PUBLIC_KEY) {
+    throw new Error('EmailJS public key is missing');
   }
+
   try {
-    emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY);
+    emailjs.init(envVars.PUBLIC_KEY);
     console.log('EmailJS initialized successfully');
   } catch (error) {
     console.error('Failed to initialize EmailJS:', error);
+    throw error;
   }
 };
 
@@ -20,27 +39,20 @@ export const sendEmail = async (data: {
   email: string;
   message: string;
 }) => {
-  // Log environment variables (without revealing full values)
-  console.log('EmailJS Configuration Check:', {
-    publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY ? '✓' : '✗',
-    serviceId: process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID ? '✓' : '✗',
-    templateId: process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID ? '✓' : '✗'
-  });
+  const envVars = logEnvStatus();
 
-  if (!process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 
-      !process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || 
-      !process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY) {
+  if (!envVars.SERVICE_ID || !envVars.TEMPLATE_ID || !envVars.PUBLIC_KEY) {
     const missingVars = [];
-    if (!process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID) missingVars.push('SERVICE_ID');
-    if (!process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID) missingVars.push('TEMPLATE_ID');
-    if (!process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY) missingVars.push('PUBLIC_KEY');
+    if (!envVars.SERVICE_ID) missingVars.push('SERVICE_ID');
+    if (!envVars.TEMPLATE_ID) missingVars.push('TEMPLATE_ID');
+    if (!envVars.PUBLIC_KEY) missingVars.push('PUBLIC_KEY');
     throw new Error(`Email service configuration is incomplete. Missing: ${missingVars.join(', ')}`);
   }
 
   try {
     const response = await emailjs.send(
-      process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
-      process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
+      envVars.SERVICE_ID,
+      envVars.TEMPLATE_ID,
       {
         from_name: data.name,
         from_email: data.email,

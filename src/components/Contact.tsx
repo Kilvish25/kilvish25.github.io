@@ -5,9 +5,12 @@ import { FaGithub, FaLinkedin, FaTwitter, FaEnvelope, FaMapMarkerAlt } from 'rea
 import { initEmailJS, sendEmail } from '../utils/emailjs';
 
 const Contact = () => {
+  const [isEmailJSInitialized, setIsEmailJSInitialized] = useState(false);
+
   useEffect(() => {
     try {
       initEmailJS();
+      setIsEmailJSInitialized(true);
     } catch (error) {
       console.error('Failed to initialize EmailJS:', error);
       setStatus(prev => ({
@@ -42,15 +45,19 @@ const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    
+    if (!isEmailJSInitialized) {
+      setStatus({
+        submitting: false,
+        submitted: false,
+        error: 'Email service is not initialized. Please try again later.'
+      });
+      return;
+    }
+
     setStatus({ submitting: true, submitted: false, error: null });
 
     try {
-      if (!process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 
-          !process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || 
-          !process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY) {
-        throw new Error('Email service is not configured properly');
-      }
-
       await sendEmail(formData);
       
       setStatus({
