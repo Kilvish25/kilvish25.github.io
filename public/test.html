@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Browser Test</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      color: #4f46e5;
+    }
+    .box {
+      background-color: #f3f4f6;
+      border-radius: 8px;
+      padding: 20px;
+      margin-top: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    button {
+      background-color: #4f46e5;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    button:hover {
+      background-color: #4338ca;
+    }
+  </style>
+</head>
+<body>
+  <h1>Basic HTML Test Page</h1>
+  <div class="box">
+    <p>If you can see this page, your browser is correctly rendering HTML and CSS.</p>
+    <button onclick="alert('Button clicked!')">Click Me</button>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('Page loaded successfully');
+    });
+  </script>
+</body>
+</html> 
