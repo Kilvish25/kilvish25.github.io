@@ -16,7 +16,7 @@ export default function CaseLink({
         const el = document.getElementById(`case-${tag}`);
         if (el instanceof HTMLDetailsElement) el.open = true;
       }}
-      className="inline-flex items-center gap-1.5 border border-line px-2.5 py-1 font-mono text-[0.6875rem] text-amber transition-colors hover:border-amber"
+      className="inline-flex items-center gap-1.5 border border-line px-2.5 py-1 font-mono text-[0.6875rem] text-accent transition-colors hover:border-accent"
     >
       {children}
       <span aria-hidden="true">→ {tag}</span>

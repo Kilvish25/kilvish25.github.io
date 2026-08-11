@@ -44,7 +44,7 @@ export default function StatusBar() {
             <a
               key={item.href}
               href={item.href}
-              className="text-muted transition-colors hover:text-amber"
+              className="text-muted transition-colors hover:text-accent"
             >
               {item.label}
             </a>

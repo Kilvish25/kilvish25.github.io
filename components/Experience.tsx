@@ -56,7 +56,7 @@ export default function Experience() {
                 i > 0 ? "border-t border-line" : ""
               }`}
             >
-              <span className="pt-1 font-mono text-xs text-amber">{e.period}</span>
+              <span className="pt-1 font-mono text-xs text-accent">{e.period}</span>
               <div>
                 <h3 className="font-display text-xl font-semibold text-ink">
                   {e.role}

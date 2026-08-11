@@ -82,7 +82,7 @@ function Tape() {
             <polyline
               points={POINTS}
               fill="none"
-              stroke="#FFB454"
+              stroke="#A3B577"
               strokeWidth="1.2"
               vectorEffect="non-scaling-stroke"
             />

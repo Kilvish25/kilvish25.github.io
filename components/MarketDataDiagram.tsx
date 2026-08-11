@@ -1,11 +1,11 @@
 /* System diagram for the market-data case study. Pure inline SVG in the
-   site's palette; amber is reserved for the correctness path. */
+   site's palette; accent is reserved for the correctness path. */
 
 const INK = "#e7eaf2";
 const MUTED = "#8a93a6";
 const LINE = "#2a3346";
 const PANEL = "#0d1119";
-const AMBER = "#ffb454";
+const ACCENT = "#a3b577";
 
 function Box({
   x,
@@ -14,7 +14,7 @@ function Box({
   h,
   title,
   sub,
-  amber = false,
+  accent = false,
 }: {
   x: number;
   y: number;
@@ -22,7 +22,7 @@ function Box({
   h: number;
   title: string;
   sub?: string;
-  amber?: boolean;
+  accent?: boolean;
 }) {
   return (
     <g>
@@ -32,8 +32,8 @@ function Box({
         width={w}
         height={h}
         fill={PANEL}
-        stroke={amber ? AMBER : LINE}
-        strokeWidth={amber ? 1.2 : 1}
+        stroke={accent ? ACCENT : LINE}
+        strokeWidth={accent ? 1.2 : 1}
       />
       <text
         x={x + w / 2}
@@ -84,8 +84,8 @@ export default function MarketDataDiagram() {
           <marker id="arr" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
             <path d="M0,0 L8,4 L0,8 z" fill={LINE} />
           </marker>
-          <marker id="arrAmber" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-            <path d="M0,0 L8,4 L0,8 z" fill={AMBER} />
+          <marker id="arrAccent" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L8,4 L0,8 z" fill={ACCENT} />
           </marker>
         </defs>
 
@@ -108,20 +108,20 @@ export default function MarketDataDiagram() {
         <Box x={185} y={118} w={150} h={44} title="WS INGEST · B" sub="staggered replica" />
         <Box x={185} y={215} w={150} h={44} title="REST VALIDATE" sub="+ backfill" />
         {/* redundancy bracket */}
-        <path d="M343,58 h5 v104 h-5" fill="none" stroke={AMBER} strokeWidth={1} />
+        <path d="M343,58 h5 v104 h-5" fill="none" stroke={ACCENT} strokeWidth={1} />
         <text x={260} y={178} textAnchor="middle" fontSize="8.5" fill={MUTED}>
           redundant · staggered · no double writes
         </text>
 
         {/* column 3 — correctness core */}
-        <Box x={395} y={58} w={150} h={44} title="GAP DETECTION" sub="redis lua · atomic claim" amber />
+        <Box x={395} y={58} w={150} h={44} title="GAP DETECTION" sub="redis lua · atomic claim" accent />
         <Box x={395} y={132} w={150} h={44} title="STORE" sub="redis hot · postgresql" />
-        <Box x={395} y={215} w={150} h={44} title="RECONCILIATION" sub="ws ↔ rest" amber />
+        <Box x={395} y={215} w={150} h={44} title="RECONCILIATION" sub="ws ↔ rest" accent />
         <Box x={395} y={292} w={150} h={40} title="DOLLAR-BAR PIPELINES" />
 
         {/* column 4 — consumers behind the freshness contract */}
-        <rect x={565} y={88} width={128} height={200} fill="none" stroke={AMBER} strokeWidth={1} strokeDasharray="5 4" opacity={0.75} />
-        <text x={629} y={78} textAnchor="middle" fontSize="8.5" fill={AMBER} style={{ letterSpacing: "0.06em" }}>
+        <rect x={565} y={88} width={128} height={200} fill="none" stroke={ACCENT} strokeWidth={1} strokeDasharray="5 4" opacity={0.75} />
+        <text x={629} y={78} textAnchor="middle" fontSize="8.5" fill={ACCENT} style={{ letterSpacing: "0.06em" }}>
           FRESHNESS CONTRACT
         </text>
         <Box x={575} y={108} w={108} h={44} title="FRESHNESS GATE" sub="verify before read" />
@@ -146,9 +146,9 @@ export default function MarketDataDiagram() {
         <line x1={335} y1={237} x2={395} y2={237} stroke={LINE} markerEnd="url(#arr)" />
         <text x={365} y={230} textAnchor="middle" fontSize="8.5" fill={MUTED}>dual path</text>
 
-        {/* reconciliation ↔ store (amber: the tolerance) */}
-        <line x1={470} y1={215} x2={470} y2={176} stroke={AMBER} markerEnd="url(#arrAmber)" markerStart="url(#arrAmber)" />
-        <text x={481} y={199} fontSize="8.5" fill={AMBER}>0.01% tolerance</text>
+        {/* reconciliation ↔ store (accent: the tolerance) */}
+        <line x1={470} y1={215} x2={470} y2={176} stroke={ACCENT} markerEnd="url(#arrAccent)" markerStart="url(#arrAccent)" />
+        <text x={481} y={199} fontSize="8.5" fill={ACCENT}>0.01% tolerance</text>
 
         {/* store → dollar-bar (elbow left of reconciliation) */}
         <path d="M395,154 h-18 v158 h18" fill="none" stroke={LINE} markerEnd="url(#arr)" />
@@ -159,9 +159,9 @@ export default function MarketDataDiagram() {
         {/* dollar-bar → freshness gate (elbow right) */}
         <path d="M545,312 h13 v-168 h17" fill="none" stroke={LINE} markerEnd="url(#arr)" />
 
-        {/* gate → strategies (amber: the guarantee) */}
-        <line x1={605} y1={152} x2={605} y2={222} stroke={AMBER} markerEnd="url(#arrAmber)" />
-        <text fontSize="8.5" fill={AMBER}>
+        {/* gate → strategies (accent: the guarantee) */}
+        <line x1={605} y1={152} x2={605} y2={222} stroke={ACCENT} markerEnd="url(#arrAccent)" />
+        <text fontSize="8.5" fill={ACCENT}>
           <tspan x={614} y={185}>complete +</tspan>
           <tspan x={614} y={196}>fresh only</tspan>
         </text>

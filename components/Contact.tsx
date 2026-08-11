@@ -18,7 +18,7 @@ export default function Contact() {
         <div className="mt-8 flex flex-wrap items-center gap-4">
           <a
             href="mailto:dharmendra.ahirwar101@gmail.com"
-            className="bg-amber px-5 py-2.5 font-mono text-sm font-medium text-bg transition-opacity hover:opacity-85"
+            className="bg-accent px-5 py-2.5 font-mono text-sm font-medium text-bg transition-opacity hover:opacity-85"
           >
             dharmendra.ahirwar101@gmail.com
           </a>
@@ -28,7 +28,7 @@ export default function Contact() {
               href={l.href}
               target={l.href.startsWith("http") ? "_blank" : undefined}
               rel={l.href.startsWith("http") ? "noopener noreferrer" : undefined}
-              className="border border-line px-5 py-2.5 font-mono text-sm text-ink transition-colors hover:border-amber hover:text-amber"
+              className="border border-line px-5 py-2.5 font-mono text-sm text-ink transition-colors hover:border-accent hover:text-accent"
             >
               {l.label}
             </a>

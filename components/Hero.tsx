@@ -11,7 +11,7 @@ export default function Hero() {
         style={{ fontSize: "clamp(2.6rem, 7vw, 5.2rem)", fontStretch: "112%" }}
       >
         <span className="block">Reliable systems,</span>
-        <span className="block text-amber">engineered end to end.</span>
+        <span className="block text-accent">engineered end to end.</span>
       </h1>
       <p className="mt-8 max-w-2xl text-[1.05rem] leading-relaxed text-muted">
         I design, build, and operate the trading platform at Hillroute
@@ -23,13 +23,13 @@ export default function Hero() {
       <div className="mt-9 flex flex-wrap items-center gap-4">
         <a
           href="#work"
-          className="bg-amber px-5 py-2.5 font-mono text-sm font-medium text-bg transition-opacity hover:opacity-85"
+          className="bg-accent px-5 py-2.5 font-mono text-sm font-medium text-bg transition-opacity hover:opacity-85"
         >
           View the work ↓
         </a>
         <a
           href="/Dharmendra-Ahirwar-Resume.pdf"
-          className="border border-line px-5 py-2.5 font-mono text-sm text-ink transition-colors hover:border-amber hover:text-amber"
+          className="border border-line px-5 py-2.5 font-mono text-sm text-ink transition-colors hover:border-accent hover:text-accent"
         >
           Résumé (PDF)
         </a>

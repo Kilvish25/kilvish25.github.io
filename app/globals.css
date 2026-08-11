@@ -8,7 +8,7 @@
   --color-ink: #e7eaf2;
   --color-muted: #8a93a6;
   --color-faint: #707b91; /* 4.5:1+ on --color-bg (WCAG AA at small sizes) */
-  --color-amber: #ffb454;
+  --color-accent: #a3b577;
   --color-green: #3dd68c;
   --font-display: var(--font-archivo);
   --font-sans: var(--font-plex-sans);
@@ -20,7 +20,7 @@ html {
 }
 
 ::selection {
-  background: #ffb454;
+  background: #a3b577;
   color: #0b0e14;
 }
 
@@ -101,7 +101,7 @@ html {
   top: 0;
   bottom: 0;
   width: 2px;
-  background: #ffb454;
+  background: #a3b577;
   transform: scaleY(0);
   transform-origin: top;
   transition: transform 0.25s ease;
@@ -121,7 +121,7 @@ html {
 a:focus-visible,
 button:focus-visible,
 summary:focus-visible {
-  outline: 2px solid #ffb454;
+  outline: 2px solid #a3b577;
   outline-offset: 3px;
   border-radius: 2px;
 }

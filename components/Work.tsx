@@ -207,7 +207,7 @@ function CaseBody({ c }: { c: CaseStudy }) {
         <ul className="flex flex-col gap-2">
           {c.approach.map((b) => (
             <li key={b.head} className="flex gap-3">
-              <span aria-hidden="true" className="select-none pt-[0.55em] font-mono text-[0.5rem] leading-none text-amber">
+              <span aria-hidden="true" className="select-none pt-[0.55em] font-mono text-[0.5rem] leading-none text-accent">
                 ▪
               </span>
               <span>
@@ -241,7 +241,7 @@ export default function Work() {
           <details key={c.tag} id={`case-${c.tag}`} open={c.featured}>
             <summary className="group grid gap-2 py-6 pl-5 pr-12 sm:grid-cols-[9rem_1fr_auto] sm:gap-6 sm:pr-4">
               <span className="pt-1">
-                <span className="block font-mono text-xs font-medium text-amber">
+                <span className="block font-mono text-xs font-medium text-accent">
                   {c.tag}
                 </span>
                 <span className="mt-1 block font-mono text-[0.6875rem] text-faint">
@@ -249,7 +249,7 @@ export default function Work() {
                 </span>
               </span>
               <span>
-                <span className="font-display text-xl font-semibold text-ink transition-colors group-hover:text-amber sm:text-2xl">
+                <span className="font-display text-xl font-semibold text-ink transition-colors group-hover:text-accent sm:text-2xl">
                   {c.title}
                 </span>
                 <span className="mt-1.5 block text-[0.95rem] leading-relaxed text-muted">
