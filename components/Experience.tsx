@@ -1,9 +1,11 @@
+import CaseLink from "./CaseLink";
+
 type Entry = {
   period: string;
   role: string;
   org: string;
   summary: string;
-  notes?: string[];
+  cases?: string[];
 };
 
 const ENTRIES: Entry[] = [
@@ -12,32 +14,29 @@ const ENTRIES: Entry[] = [
     role: "Software Engineer",
     org: "Hillroute Capital · Delhi",
     summary:
-      "Own the technology platform of a regulated digital-assets quant fund: real-time market data, exchange gateways, orchestration, databases, CI/CD and fleet-wide observability — plus incident response and mentoring.",
+      "Design, build, and operate the technology platform of a regulated digital-assets quant fund.",
+    cases: ["market-data", "gateway", "orchestration", "database", "platform"],
   },
   {
     period: "2022 — 2024",
     role: "Senior Software Engineer",
     org: "Helloverify India",
     summary:
-      "Rebuilt core services in Python/Django, replacing a legacy system and increasing throughput efficiency by 200%. Architected the move to microservices (−40% downtime), tuned Gunicorn/Nginx/Celery/Redis (−70% latency), automated CI/CD with Azure DevOps, and containerised services with Docker (−30% cloud cost).",
+      "Rebuilt and re-architected the core services of a background-verification platform serving enterprise clients.",
+    cases: ["migration"],
   },
   {
     period: "2020",
     role: "Software Engineer Intern",
     org: "Pirates India",
     summary:
-      "Designed schemas handling 50,000+ daily transactions (−30% query time across 100k+ records) and built a Python ML recommendation engine that lifted user read-time by 25–30%.",
+      "Database schemas for 50,000+ daily transactions, and a Python ML recommendation engine that lifted user read-time by 25–30%.",
   },
   {
     period: "2018 — 2022",
     role: "B.Tech, Mathematics & Computing",
     org: "Indian Institute of Technology Delhi",
-    summary:
-      "Selected through JEE Advanced, 2018.",
-    notes: [
-      "KVPY Fellowship, SX stream — 2018",
-      "Dakshana Foundation Fellowship — 2016",
-    ],
+    summary: "Selected through JEE Advanced, 2018.",
   },
 ];
 
@@ -53,7 +52,7 @@ export default function Experience() {
           {ENTRIES.map((e, i) => (
             <li
               key={e.period}
-              className={`grid gap-3 py-8 sm:grid-cols-[9rem_1fr] sm:gap-6 ${
+              className={`grid gap-3 py-7 sm:grid-cols-[9rem_1fr] sm:gap-6 ${
                 i > 0 ? "border-t border-line" : ""
               }`}
             >
@@ -66,14 +65,12 @@ export default function Experience() {
                 <p className="mt-3 max-w-3xl text-[0.95rem] leading-relaxed text-muted">
                   {e.summary}
                 </p>
-                {e.notes && (
-                  <ul className="mt-3 flex flex-wrap gap-x-6 gap-y-1">
-                    {e.notes.map((n) => (
-                      <li key={n} className="font-mono text-[0.6875rem] text-faint">
-                        {n}
-                      </li>
+                {e.cases && (
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {e.cases.map((tag) => (
+                      <CaseLink key={tag} tag={tag} />
                     ))}
-                  </ul>
+                  </div>
                 )}
               </div>
             </li>

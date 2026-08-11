@@ -35,6 +35,14 @@ export const metadata: Metadata = {
     url: "https://kilvish25.github.io",
     siteName: "Dharmendra Ahirwar",
     type: "website",
+    images: [{ url: "/og.png", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Dharmendra Ahirwar — Platform & Infrastructure Engineer",
+    description:
+      "Reliable systems, engineered end to end — architecture through production operations.",
+    images: ["/og.png"],
   },
 };
 

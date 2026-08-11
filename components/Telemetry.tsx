@@ -11,16 +11,15 @@ type MetricProps = {
 };
 
 function Metric({ target, prefix = "", suffix = "", label, context }: MetricProps) {
-  const [value, setValue] = useState(0);
+  // initialize at the real value so crawlers, previews, and no-JS visitors
+  // never see a board of zeros; the count-up only runs client-side
+  const [value, setValue] = useState(target);
   const ref = useRef<HTMLDivElement>(null);
   const started = useRef(false);
 
   useEffect(() => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced) {
-      setValue(target);
-      return;
-    }
+    if (reduced) return;
     const el = ref.current;
     if (!el) return;
     const start = () => {
@@ -62,21 +61,22 @@ function Metric({ target, prefix = "", suffix = "", label, context }: MetricProp
   );
 }
 
-/* Deterministic sparkline segment; two copies loop as a seamless tape. */
+/* Deterministic long-period sparkline; two copies loop as a seamless tape.
+   The segment is 1200px wide so the repeat is imperceptible on any viewport. */
 const POINTS =
-  "0,22 20,20 34,24 52,12 70,16 88,8 106,18 124,14 142,22 158,10 176,15 194,20 210,6 228,16 246,12 264,19 282,9 300,22";
+  "0,21 18,19 30,23 46,14 62,17 80,9 96,18 110,15 128,22 142,11 160,16 178,20 192,7 210,15 226,12 240,19 258,10 274,14 290,21 306,17 320,24 338,13 352,18 368,8 384,16 400,12 418,20 434,9 448,15 466,19 480,6 498,14 514,18 528,11 546,16 562,22 578,10 592,17 610,13 626,19 640,8 658,15 674,21 688,12 706,18 722,14 738,23 752,9 770,16 786,20 800,11 818,17 834,7 848,14 866,19 882,12 898,16 914,22 930,10 946,18 960,13 978,20 994,15 1010,8 1026,17 1040,12 1058,19 1074,14 1088,21 1106,9 1122,16 1138,18 1152,11 1170,15 1186,13 1200,21";
 
 function Tape() {
   return (
     <div className="overflow-hidden border-b border-line" aria-hidden="true">
       <div className="tape-track opacity-70">
-        {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => (
+        {[0, 1].map((i) => (
           <svg
             key={i}
-            width="300"
+            width="1200"
             height="30"
-            viewBox="0 0 300 30"
-            className="h-[30px] w-[300px] shrink-0"
+            viewBox="0 0 1200 30"
+            className="h-[30px] w-[1200px] shrink-0"
             preserveAspectRatio="none"
           >
             <polyline
@@ -95,11 +95,9 @@ function Tape() {
 
 const METRICS: MetricProps[] = [
   { target: 4, suffix: "+", label: "years in production", context: "backend & platform engineering" },
-  { target: 15, suffix: "+", label: "services shipped", context: "designed, deployed, kept alive" },
-  { target: 530, suffix: "+", label: "symbols streaming", context: "real-time market data" },
-  { target: 40, prefix: "~", suffix: " ms", label: "replica lag", context: "PostgreSQL hot standby" },
-  { target: 105, label: "DAGs orchestrated", context: "Airflow, active-active HA" },
-  { target: 12, label: "CI/CD pipelines", context: "built from zero" },
+  { target: 530, suffix: "+", label: "symbols streaming", context: "trade-level · 3 exchanges" },
+  { target: 0, label: "downtime", context: "PostgreSQL estate, migrated live" },
+  { target: 80, prefix: "−", suffix: "%", label: "data lag", context: "market-data platform rebuild" },
 ];
 
 export default function Telemetry() {
@@ -113,7 +111,7 @@ export default function Telemetry() {
         </span>
       </div>
       <Tape />
-      <div className="grid grid-cols-2 gap-px bg-line sm:grid-cols-3 [&>div]:bg-panel">
+      <div className="grid grid-cols-2 gap-px bg-line sm:grid-cols-4 [&>div]:bg-panel">
         {METRICS.map((m) => (
           <Metric key={m.label} {...m} />
         ))}

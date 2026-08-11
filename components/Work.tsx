@@ -1,3 +1,7 @@
+import MarketDataDiagram from "./MarketDataDiagram";
+
+type Bullet = { head: string; text: string };
+
 type CaseStudy = {
   tag: string;
   org: string;
@@ -5,8 +9,9 @@ type CaseStudy = {
   oneLiner: string;
   metrics: string[];
   problem: string;
-  approach: string;
+  approach: Bullet[];
   outcome: string;
+  featured?: boolean;
 };
 
 const CASES: CaseStudy[] = [
@@ -16,13 +21,30 @@ const CASES: CaseStudy[] = [
     title: "Real-time market-data platform",
     oneLiner:
       "Trade-level ingestion across three exchanges, with correctness guarantees strategies can trust.",
-    metrics: ["530+ symbols", "3 exchanges", "−80% data lag", "0.01% reconciliation"],
+    metrics: ["0.01% reconciliation tolerance", "dual-path WS/REST"],
     problem:
       "Strategies were reading lagging, gap-prone data, and the cost showed up directly as execution slippage. There was no way to know whether a feed was complete before trading on it.",
-    approach:
-      "Built from scratch in async Python/FastAPI: WebSocket trade-level streams with REST validation and backfill, and dollar-bar aggregation pipelines. Correctness is engineered in — Lua-scripted atomic gap detection lets redundant staggered instances run without double-writing, dual-path WebSocket/REST reconciliation holds a 0.01% tolerance, and a freshness contract lets downstream strategies verify data before reading it.",
+    approach: [
+      {
+        head: "WebSocket + REST, dual path",
+        text: "async Python/FastAPI trade-level streams with REST validation, backfill, and dollar-bar aggregation",
+      },
+      {
+        head: "Atomic gap detection (Redis Lua)",
+        text: "redundant staggered instances run concurrently without double-writing",
+      },
+      {
+        head: "Reconciliation at 0.01% tolerance",
+        text: "WebSocket and REST paths continuously cross-checked",
+      },
+      {
+        head: "Freshness contract",
+        text: "strategies verify data completeness before reading — stale data is unreadable by design",
+      },
+    ],
     outcome:
       "Data lag cut by over 80%, execution slippage materially reduced, and no strategy ever executes on stale or incomplete data.",
+    featured: true,
   },
   {
     tag: "gateway",
@@ -30,11 +52,23 @@ const CASES: CaseStudy[] = [
     title: "Centralised exchange API gateway",
     oneLiner:
       "One controlled path to every exchange, ending rate-limit contention and exchange-side bans.",
-    metrics: ["150 endpoints", "89 automated tests", "5-tier test pyramid"],
+    metrics: ["150 endpoints", "89 automated tests"],
     problem:
       "Every service hit exchange APIs independently. Rate-limit budgets collided across services, and exchange-side bans could stop the whole fund from trading.",
-    approach:
-      "A single gateway in front of every exchange, with a Redis-Lua distributed rate limiter and weight-aware, multi-egress failover. Verified by 89 automated tests across a five-tier pyramid: unit, integration, load and chaos.",
+    approach: [
+      {
+        head: "Distributed rate limiter (Redis Lua)",
+        text: "one shared, atomic budget across every consuming service",
+      },
+      {
+        head: "Weight-aware multi-egress failover",
+        text: "requests routed by remaining exchange quota, not round-robin",
+      },
+      {
+        head: "Five-tier test pyramid",
+        text: "89 automated tests — unit, integration, load, and chaos",
+      },
+    ],
     outcome:
       "Cross-service rate-limit contention eliminated, and exchange-side bans stopped entirely.",
   },
@@ -43,11 +77,23 @@ const CASES: CaseStudy[] = [
     org: "Hillroute · 2026",
     title: "Airflow, active-active",
     oneLiner: "An orchestration layer where a deploy can never interrupt a live trade.",
-    metrics: ["105 DAGs", "7 worker hosts", "8 queues", "2.9 → 3.1"],
+    metrics: ["105 DAGs", "7 worker hosts", "Airflow 2.9 → 3.1 zero-stop upgrade"],
     problem:
       "Workflows lived in scattered cron entries with no visibility or audit trail, and the scheduler was a single point of failure. Deploying during trading hours was a risk.",
-    approach:
-      "Upgraded Airflow 2.9 to 3.1 and re-architected it to active-active high availability on CeleryExecutor — 105 DAGs, 8 routing queues, 7 worker hosts. Releases gracefully drain in-flight tasks; cron workflows were migrated into DAGs for visibility and auditability.",
+    approach: [
+      {
+        head: "Active-active high availability",
+        text: "re-architected on CeleryExecutor — 105 DAGs, 8 routing queues, 7 worker hosts",
+      },
+      {
+        head: "Graceful drain on release",
+        text: "in-flight tasks complete before workers restart; deploys can't interrupt a trade",
+      },
+      {
+        head: "Cron → DAG migration",
+        text: "every scheduled job made visible, retryable, and auditable",
+      },
+    ],
     outcome:
       "The orchestration layer deploys at any hour without touching a live trade, and every scheduled job is visible and auditable.",
   },
@@ -57,11 +103,23 @@ const CASES: CaseStudy[] = [
     title: "PostgreSQL estate, moved live",
     oneLiner:
       "Zero-downtime migration of every production database, then a hot standby to close the DR gap.",
-    metrics: ["0 downtime", "~40 ms replay lag", "60M-row read tier"],
+    metrics: ["~40 ms replay lag", "60M-row read tier"],
     problem:
       "The fund's system of record sat on aging hardware with no disaster-recovery story — the platform's largest single risk.",
-    approach:
-      "Executed a staged, zero-downtime migration of the entire PostgreSQL estate to new hardware, then added a streaming hot standby. Built a DuckDB read tier mirroring a 60M-row dataset so research and backtesting never contend with production trading.",
+    approach: [
+      {
+        head: "Staged zero-downtime migration",
+        text: "the entire PostgreSQL estate moved to new hardware with trading uninterrupted",
+      },
+      {
+        head: "Streaming hot standby",
+        text: "continuous replication closed the disaster-recovery gap",
+      },
+      {
+        head: "DuckDB read tier",
+        text: "a 60M-row mirror so research and backtesting never contend with production",
+      },
+    ],
     outcome:
       "The DR gap is closed with ~40 ms replay lag, and analytics load is fully isolated from the trading path.",
   },
@@ -71,13 +129,25 @@ const CASES: CaseStudy[] = [
     title: "Zero to platform engineering",
     oneLiner:
       "CI/CD, staging, observability and hardening for a fleet that previously had none.",
-    metrics: ["12 pipelines", "11 hosts instrumented", "~31k lines of docs"],
+    metrics: ["12 pipelines", "11 hosts instrumented", "31k-line runbook corpus"],
     problem:
       "No CI/CD, no monitoring, no staging environment: every deploy was manual, and failures were silent until they hurt.",
-    approach:
-      "Took the organisation from zero to 12 automated pipelines on a shared, resource-capped self-hosted runner pool, with a staging environment enforcing fail-closed production isolation. Fleet-wide observability with Prometheus, Grafana, Alertmanager and custom exporters; zero-trust private networking; host-hardening baselines; phone escalation for risk-critical jobs.",
+    approach: [
+      {
+        head: "12 pipelines from zero",
+        text: "on a shared, resource-capped self-hosted runner pool, with a fail-closed staging environment",
+      },
+      {
+        head: "Fleet-wide observability",
+        text: "Prometheus, Grafana, Alertmanager and custom exporters on all 11 hosts; phone escalation for risk-critical jobs",
+      },
+      {
+        head: "Hardening + conventions",
+        text: "zero-trust private networking, host baselines, and ~31,000 lines of architecture and runbook documentation",
+      },
+    ],
     outcome:
-      "A supervised, observable, documented platform — backed by the organisation's engineering conventions and ~31,000 lines of architecture and runbook documentation.",
+      "A supervised, observable, documented platform that anyone on the team can operate.",
   },
   {
     tag: "migration",
@@ -85,21 +155,73 @@ const CASES: CaseStudy[] = [
     title: "Legacy monolith to microservices",
     oneLiner:
       "Rebuilt a background-verification platform's core services and re-architected them for scale.",
-    metrics: ["+200% throughput", "−40% downtime", "−70% latency", "−30% cloud cost"],
+    metrics: ["+200% throughput", "−40% downtime", "−70% latency"],
     problem:
       "A legacy system had hit its scaling limits: throughput bottlenecks, recurring downtime, and infrastructure costs growing faster than traffic.",
-    approach:
-      "Rebuilt the core services in Python/Django, then architected the migration to microservices. Optimised database schemas and indexing, tuned the Gunicorn/Nginx/Celery/Redis stack, containerised services with Docker, and automated CI/CD with Azure DevOps — with SonarQube and SCA/SAST/DAST gates in the pipeline.",
+    approach: [
+      {
+        head: "Core services rebuilt",
+        text: "Python/Django rewrite, then a staged migration to microservices",
+      },
+      {
+        head: "Stack tuned end to end",
+        text: "database schemas and indexing, Gunicorn/Nginx/Celery/Redis configuration, Docker packaging",
+      },
+      {
+        head: "Quality gates in CI/CD",
+        text: "Azure DevOps pipelines with SonarQube and SCA/SAST/DAST scanning built in",
+      },
+    ],
     outcome:
-      "Throughput efficiency up 200%, downtime down 40%, latency down 70%, cloud costs down 30% — and deployments 50% faster with quality gates built in.",
+      "Throughput efficiency up 200%, downtime down 40%, latency down 70%, cloud costs down 30% — with deployments 50% faster.",
   },
 ];
 
-function Detail({ label, text }: { label: string; text: string }) {
+function Detail({
+  label,
+  children,
+}: {
+  label: string;
+  children: React.ReactNode;
+}) {
   return (
     <div className="grid gap-2 sm:grid-cols-[7.5rem_1fr] sm:gap-6">
       <span className="label pt-0.5">{label}</span>
-      <p className="text-[0.95rem] leading-relaxed text-muted">{text}</p>
+      <div className="text-[0.95rem] leading-relaxed text-muted">{children}</div>
+    </div>
+  );
+}
+
+function CaseBody({ c }: { c: CaseStudy }) {
+  return (
+    <div className="flex flex-col gap-5 pb-8 pl-5 pr-4 sm:pl-[15rem] sm:pr-16">
+      <Detail label="Problem">
+        <p>{c.problem}</p>
+      </Detail>
+      {c.featured && (
+        <Detail label="System">
+          <MarketDataDiagram />
+        </Detail>
+      )}
+      <Detail label="Approach">
+        <ul className="flex flex-col gap-2">
+          {c.approach.map((b) => (
+            <li key={b.head} className="flex gap-3">
+              <span aria-hidden="true" className="select-none pt-[0.55em] font-mono text-[0.5rem] leading-none text-amber">
+                ▪
+              </span>
+              <span>
+                <strong className="font-medium text-ink">{b.head}</strong>
+                {" — "}
+                {b.text}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </Detail>
+      <Detail label="Outcome">
+        <p>{c.outcome}</p>
+      </Detail>
     </div>
   );
 }
@@ -116,8 +238,8 @@ export default function Work() {
       </div>
       <div className="case">
         {CASES.map((c) => (
-          <details key={c.tag}>
-            <summary className="group grid gap-2 py-6 pl-5 pr-4 sm:grid-cols-[9rem_1fr_auto] sm:gap-6">
+          <details key={c.tag} id={`case-${c.tag}`} open={c.featured}>
+            <summary className="group grid gap-2 py-6 pl-5 pr-12 sm:grid-cols-[9rem_1fr_auto] sm:gap-6 sm:pr-4">
               <span className="pt-1">
                 <span className="block font-mono text-xs font-medium text-amber">
                   {c.tag}
@@ -140,17 +262,13 @@ export default function Work() {
                 </span>
               </span>
               <span
-                className="expand-icon hidden pt-1 font-mono text-lg text-muted sm:block"
+                className="expand-icon absolute right-4 top-7 font-mono text-lg text-muted sm:static sm:pt-1"
                 aria-hidden="true"
               >
                 +
               </span>
             </summary>
-            <div className="flex flex-col gap-5 pb-8 pl-5 pr-4 sm:pl-[15rem] sm:pr-16">
-              <Detail label="Problem" text={c.problem} />
-              <Detail label="Approach" text={c.approach} />
-              <Detail label="Outcome" text={c.outcome} />
-            </div>
+            <CaseBody c={c} />
           </details>
         ))}
       </div>

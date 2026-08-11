@@ -30,16 +30,16 @@ export default function StatusBar() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-line bg-bg/85 backdrop-blur">
-      <div className="mx-auto flex h-12 max-w-6xl items-center justify-between px-5 font-mono text-xs">
+      <div className="mx-auto flex h-12 max-w-6xl items-center justify-between gap-4 px-5 font-mono text-xs">
         <a href="#top" className="text-ink">
           <span className="hidden font-medium tracking-[0.18em] sm:inline">
             DHARMENDRA AHIRWAR
           </span>
-          <span className="font-medium tracking-[0.18em] sm:hidden">
-            D. AHIRWAR
+          <span className="whitespace-nowrap font-medium tracking-[0.14em] sm:hidden">
+            D.AHIRWAR
           </span>
         </a>
-        <nav className="flex items-center gap-5 sm:gap-7">
+        <nav className="flex items-center gap-3.5 sm:gap-7">
           {NAV.map((item) => (
             <a
               key={item.href}

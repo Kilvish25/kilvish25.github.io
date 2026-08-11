@@ -1,7 +1,7 @@
 const LINKS = [
-  { label: "github.com/Kilvish25", href: "https://github.com/Kilvish25" },
   { label: "linkedin.com/in/kilvish25", href: "https://linkedin.com/in/kilvish25" },
   { label: "Résumé (PDF)", href: "/Dharmendra-Ahirwar-Resume.pdf" },
+  { label: "github.com/Kilvish25", href: "https://github.com/Kilvish25" },
 ];
 
 export default function Contact() {

@@ -14,11 +14,11 @@ export default function Hero() {
         <span className="block text-amber">engineered end to end.</span>
       </h1>
       <p className="mt-8 max-w-2xl text-[1.05rem] leading-relaxed text-muted">
-        I design, build, and operate production systems the whole way through
-        — architecture, implementation, testing, deployment, observability,
-        and incident response. Reliability and performance are engineered in
-        from the first commit, not patched in after. Currently building the
-        trading platform of a digital-assets quant fund.
+        I design, build, and operate the trading platform at Hillroute
+        Capital, a regulated digital-assets quant fund — real-time market
+        data, exchange gateways, orchestration, databases, and the
+        observability that keeps it all honest. Reliability and performance
+        are engineered in from the first commit, not patched in after.
       </p>
       <div className="mt-9 flex flex-wrap items-center gap-4">
         <a
