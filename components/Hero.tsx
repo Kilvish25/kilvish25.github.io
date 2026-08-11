@@ -10,14 +10,15 @@ export default function Hero() {
         className="font-display font-bold leading-[0.98] tracking-tight text-ink [text-wrap:balance]"
         style={{ fontSize: "clamp(2.6rem, 7vw, 5.2rem)", fontStretch: "112%" }}
       >
-        <span className="block">I build the systems</span>
-        <span className="block text-amber">other systems rely on.</span>
+        <span className="block">Reliable systems,</span>
+        <span className="block text-amber">engineered end to end.</span>
       </h1>
       <p className="mt-8 max-w-2xl text-[1.05rem] leading-relaxed text-muted">
-        Backend and platform engineer working in Python and the systems around
-        it — real-time data pipelines, distributed services, databases, and
-        the infrastructure that keeps them observable and reliable. Currently
-        engineering the trading platform at a digital-assets quant fund.
+        I design, build, and operate production systems the whole way through
+        — architecture, implementation, testing, deployment, observability,
+        and incident response. Reliability and performance are engineered in
+        from the first commit, not patched in after. Currently building the
+        trading platform of a digital-assets quant fund.
       </p>
       <div className="mt-9 flex flex-wrap items-center gap-4">
         <a
