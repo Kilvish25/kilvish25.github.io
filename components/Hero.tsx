@@ -1,0 +1,44 @@
+import Telemetry from "./Telemetry";
+
+export default function Hero() {
+  return (
+    <section id="top" className="mx-auto max-w-6xl px-5 pb-20 pt-32 sm:pt-40">
+      <p className="label mb-6">
+        Dharmendra Ahirwar · Platform &amp; Infrastructure
+      </p>
+      <h1
+        className="font-display font-bold leading-[0.98] tracking-tight text-ink [text-wrap:balance]"
+        style={{ fontSize: "clamp(2.6rem, 7vw, 5.2rem)", fontStretch: "112%" }}
+      >
+        <span className="block">Systems that trade real money.</span>
+        <span className="block text-amber">Run by one engineer.</span>
+      </h1>
+      <p className="mt-8 max-w-2xl text-[1.05rem] leading-relaxed text-muted">
+        I own the technology platform at Hillroute Capital, a regulated
+        digital-assets quant fund — market data, exchange gateways,
+        orchestration, databases, CI/CD and observability. Designed, shipped,
+        and kept alive in production.
+      </p>
+      <div className="mt-9 flex flex-wrap items-center gap-4">
+        <a
+          href="#work"
+          className="bg-amber px-5 py-2.5 font-mono text-sm font-medium text-bg transition-opacity hover:opacity-85"
+        >
+          View the work ↓
+        </a>
+        <a
+          href="/Dharmendra-Ahirwar-Resume.pdf"
+          className="border border-line px-5 py-2.5 font-mono text-sm text-ink transition-colors hover:border-amber hover:text-amber"
+        >
+          Résumé (PDF)
+        </a>
+        <span className="font-mono text-xs text-faint">
+          IIT Delhi · Mathematics &amp; Computing
+        </span>
+      </div>
+      <div className="mt-16">
+        <Telemetry />
+      </div>
+    </section>
+  );
+}

@@ -1,69 +1,21 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
 # dependencies
 /node_modules
-/.pnp
-.pnp.js
-
-# testing
-/coverage
 
 # next.js
 /.next/
 /out/
 
-# production
-/build
+# design-review screenshots
+/shots/
 
 # misc
 .DS_Store
 *.pem
-Thumbs.db
-
-# debug
 npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
 
-# local env files
-.env*.local
-.env
-
-# vercel
-.vercel
+# env
+.env*
 
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-
-# IDE
-.idea/
-.vscode/
-*.swp
-*.swo
-
-# OS generated files
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
-
-# Build output
-/dist/
-/.cache/
-
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# Optional npm cache directory
-.npm
-
-# Optional eslint cache
-.eslintcache
