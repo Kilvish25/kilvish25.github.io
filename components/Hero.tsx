@@ -4,20 +4,20 @@ export default function Hero() {
   return (
     <section id="top" className="mx-auto max-w-6xl px-5 pb-20 pt-32 sm:pt-40">
       <p className="label mb-6">
-        Dharmendra Ahirwar · Platform &amp; Infrastructure
+        Dharmendra Ahirwar · Platform &amp; Infrastructure Engineer
       </p>
       <h1
         className="font-display font-bold leading-[0.98] tracking-tight text-ink [text-wrap:balance]"
         style={{ fontSize: "clamp(2.6rem, 7vw, 5.2rem)", fontStretch: "112%" }}
       >
-        <span className="block">Systems that trade real money.</span>
-        <span className="block text-amber">Run by one engineer.</span>
+        <span className="block">I build the systems</span>
+        <span className="block text-amber">other systems rely on.</span>
       </h1>
       <p className="mt-8 max-w-2xl text-[1.05rem] leading-relaxed text-muted">
-        I own the technology platform at Hillroute Capital, a regulated
-        digital-assets quant fund — market data, exchange gateways,
-        orchestration, databases, CI/CD and observability. Designed, shipped,
-        and kept alive in production.
+        Backend and platform engineer working in Python and the systems around
+        it — real-time data pipelines, distributed services, databases, and
+        the infrastructure that keeps them observable and reliable. Currently
+        engineering the trading platform at a digital-assets quant fund.
       </p>
       <div className="mt-9 flex flex-wrap items-center gap-4">
         <a

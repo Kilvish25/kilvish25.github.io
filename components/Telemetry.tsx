@@ -94,22 +94,22 @@ function Tape() {
 }
 
 const METRICS: MetricProps[] = [
-  { target: 530, suffix: "+", label: "symbols streaming", context: "trade-level, WebSocket + REST" },
+  { target: 4, suffix: "+", label: "years in production", context: "backend & platform engineering" },
+  { target: 15, suffix: "+", label: "services shipped", context: "designed, deployed, kept alive" },
+  { target: 530, suffix: "+", label: "symbols streaming", context: "real-time market data" },
   { target: 40, prefix: "~", suffix: " ms", label: "replica lag", context: "PostgreSQL hot standby" },
-  { target: 3, label: "exchanges", context: "Binance · OKX · Deribit" },
-  { target: 11, label: "host fleet", context: "fully instrumented" },
   { target: 105, label: "DAGs orchestrated", context: "Airflow, active-active HA" },
-  { target: 80, prefix: "−", suffix: "%", label: "data lag", context: "vs. previous pipeline" },
+  { target: 12, label: "CI/CD pipelines", context: "built from zero" },
 ];
 
 export default function Telemetry() {
   return (
-    <section aria-label="Platform metrics" className="border border-line bg-panel">
+    <section aria-label="Career metrics" className="border border-line bg-panel">
       <div className="flex items-center justify-between border-b border-line px-5 py-3 sm:px-6">
-        <span className="label">Platform telemetry</span>
+        <span className="label">Engineering telemetry</span>
         <span className="flex items-center gap-2.5 font-mono text-[0.6875rem] tracking-widest text-green">
           <span className="dot-live" aria-hidden="true" />
-          IN PRODUCTION SINCE JAN 2025
+          SHIPPING SINCE 2020
         </span>
       </div>
       <Tape />

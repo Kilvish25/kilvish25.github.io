@@ -1,5 +1,6 @@
 type CaseStudy = {
   tag: string;
+  org: string;
   title: string;
   oneLiner: string;
   metrics: string[];
@@ -11,6 +12,7 @@ type CaseStudy = {
 const CASES: CaseStudy[] = [
   {
     tag: "market-data",
+    org: "Hillroute · 2025",
     title: "Real-time market-data platform",
     oneLiner:
       "Trade-level ingestion across three exchanges, with correctness guarantees strategies can trust.",
@@ -24,6 +26,7 @@ const CASES: CaseStudy[] = [
   },
   {
     tag: "gateway",
+    org: "Hillroute · 2025",
     title: "Centralised exchange API gateway",
     oneLiner:
       "One controlled path to every exchange, ending rate-limit contention and exchange-side bans.",
@@ -37,6 +40,7 @@ const CASES: CaseStudy[] = [
   },
   {
     tag: "orchestration",
+    org: "Hillroute · 2026",
     title: "Airflow, active-active",
     oneLiner: "An orchestration layer where a deploy can never interrupt a live trade.",
     metrics: ["105 DAGs", "7 worker hosts", "8 queues", "2.9 → 3.1"],
@@ -49,6 +53,7 @@ const CASES: CaseStudy[] = [
   },
   {
     tag: "database",
+    org: "Hillroute · 2026",
     title: "PostgreSQL estate, moved live",
     oneLiner:
       "Zero-downtime migration of every production database, then a hot standby to close the DR gap.",
@@ -62,6 +67,7 @@ const CASES: CaseStudy[] = [
   },
   {
     tag: "platform",
+    org: "Hillroute · 2025–26",
     title: "Zero to platform engineering",
     oneLiner:
       "CI/CD, staging, observability and hardening for a fleet that previously had none.",
@@ -72,6 +78,20 @@ const CASES: CaseStudy[] = [
       "Took the organisation from zero to 12 automated pipelines on a shared, resource-capped self-hosted runner pool, with a staging environment enforcing fail-closed production isolation. Fleet-wide observability with Prometheus, Grafana, Alertmanager and custom exporters; zero-trust private networking; host-hardening baselines; phone escalation for risk-critical jobs.",
     outcome:
       "A supervised, observable, documented platform — backed by the organisation's engineering conventions and ~31,000 lines of architecture and runbook documentation.",
+  },
+  {
+    tag: "migration",
+    org: "Helloverify · 2022–24",
+    title: "Legacy monolith to microservices",
+    oneLiner:
+      "Rebuilt a background-verification platform's core services and re-architected them for scale.",
+    metrics: ["+200% throughput", "−40% downtime", "−70% latency", "−30% cloud cost"],
+    problem:
+      "A legacy system had hit its scaling limits: throughput bottlenecks, recurring downtime, and infrastructure costs growing faster than traffic.",
+    approach:
+      "Rebuilt the core services in Python/Django, then architected the migration to microservices. Optimised database schemas and indexing, tuned the Gunicorn/Nginx/Celery/Redis stack, containerised services with Docker, and automated CI/CD with Azure DevOps — with SonarQube and SCA/SAST/DAST gates in the pipeline.",
+    outcome:
+      "Throughput efficiency up 200%, downtime down 40%, latency down 70%, cloud costs down 30% — and deployments 50% faster with quality gates built in.",
   },
 ];
 
@@ -91,15 +111,20 @@ export default function Work() {
         <h2 className="label shrink-0 !text-ink">Selected work</h2>
         <div className="h-px flex-1 bg-line" aria-hidden="true" />
         <span className="font-mono text-[0.6875rem] text-faint">
-          Hillroute Capital · 2025—
+          production systems · 2022—
         </span>
       </div>
       <div className="case">
         {CASES.map((c) => (
           <details key={c.tag}>
             <summary className="group grid gap-2 py-6 pl-5 pr-4 sm:grid-cols-[9rem_1fr_auto] sm:gap-6">
-              <span className="pt-1 font-mono text-xs font-medium text-amber">
-                {c.tag}
+              <span className="pt-1">
+                <span className="block font-mono text-xs font-medium text-amber">
+                  {c.tag}
+                </span>
+                <span className="mt-1 block font-mono text-[0.6875rem] text-faint">
+                  {c.org}
+                </span>
               </span>
               <span>
                 <span className="font-display text-xl font-semibold text-ink transition-colors group-hover:text-amber sm:text-2xl">

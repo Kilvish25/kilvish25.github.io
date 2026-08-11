@@ -27,11 +27,11 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://kilvish25.github.io"),
   title: "Dharmendra Ahirwar — Platform & Infrastructure Engineer",
   description:
-    "I build and run the trading infrastructure of a digital-assets quant fund: real-time market data across 3 exchanges, exchange API gateways, Airflow HA, PostgreSQL, CI/CD and observability across an 11-host fleet.",
+    "Backend and platform engineer building real-time data pipelines, distributed services, and reliable infrastructure — from market-data platforms and API gateways to orchestration, databases, and observability.",
   openGraph: {
     title: "Dharmendra Ahirwar — Platform & Infrastructure Engineer",
     description:
-      "Systems that trade real money, built and run by one engineer. Market data, gateways, orchestration, databases, observability.",
+      "Backend and platform engineer building real-time data pipelines, distributed services, and reliable infrastructure.",
     url: "https://kilvish25.github.io",
     siteName: "Dharmendra Ahirwar",
     type: "website",

@@ -12,7 +12,7 @@ const ENTRIES: Entry[] = [
     role: "Software Engineer",
     org: "Hillroute Capital · Delhi",
     summary:
-      "Sole owner of the technology platform for a regulated digital-assets quant fund — everything in the selected work above, plus incident response end to end and mentoring a junior engineer.",
+      "Own the technology platform of a regulated digital-assets quant fund: real-time market data, exchange gateways, orchestration, databases, CI/CD and fleet-wide observability — plus incident response and mentoring.",
   },
   {
     period: "2022 — 2024",
