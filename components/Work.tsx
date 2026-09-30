@@ -20,8 +20,8 @@ const CASES: CaseStudy[] = [
     org: "Hillroute · 2025",
     title: "Real-time market-data platform",
     oneLiner:
-      "Trade-level ingestion across three exchanges, with correctness guarantees strategies can trust.",
-    metrics: ["0.01% reconciliation tolerance", "dual-path WS/REST"],
+      "Trade-level ingestion for 530+ symbols across three exchanges, with correctness guarantees strategies can trust.",
+    metrics: ["80%+ less data lag", "0.01% reconciliation tolerance", "dual-path WS/REST"],
     problem:
       "Strategies were reading lagging, gap-prone data, and the cost showed up directly as execution slippage. There was no way to know whether a feed was complete before trading on it.",
     approach: [
@@ -187,14 +187,14 @@ function Detail({
   return (
     <div className="grid gap-2 sm:grid-cols-[7.5rem_1fr] sm:gap-6">
       <span className="label pt-0.5">{label}</span>
-      <div className="text-[0.95rem] leading-relaxed text-muted">{children}</div>
+      <div className="text-base leading-relaxed text-muted">{children}</div>
     </div>
   );
 }
 
 function CaseBody({ c }: { c: CaseStudy }) {
   return (
-    <div className="flex flex-col gap-5 pb-8 pl-5 pr-4 sm:pl-[15rem] sm:pr-16">
+    <div className="case-body">
       <Detail label="Problem">
         <p>{c.problem}</p>
       </Detail>
@@ -228,41 +228,41 @@ function CaseBody({ c }: { c: CaseStudy }) {
 
 export default function Work() {
   return (
-    <section id="work" className="mx-auto max-w-6xl scroll-mt-20 px-5 py-20">
-      <div className="mb-10 flex items-center gap-5">
-        <h2 className="label shrink-0 !text-ink">Selected work</h2>
-        <div className="h-px flex-1 bg-line" aria-hidden="true" />
-        <span className="font-mono text-[0.6875rem] text-faint">
-          production systems · 2022—
-        </span>
+    <section id="work" className="section-shell pb-20 pt-8">
+      <div className="section-heading">
+        <div>
+          <span className="eyebrow mb-3 block">01 / Selected work</span>
+          <h2 className="section-title">Built for the real world.</h2>
+        </div>
+        <p>Production systems, measurable outcomes.<br />Open a project for the engineering behind it.</p>
       </div>
       <div className="case">
         {CASES.map((c) => (
-          <details key={c.tag} id={`case-${c.tag}`} open={c.featured}>
-            <summary className="group grid gap-2 py-6 pl-5 pr-12 sm:grid-cols-[9rem_1fr_auto] sm:gap-6 sm:pr-4">
-              <span className="pt-1">
-                <span className="block font-mono text-xs font-medium text-accent">
+          <details key={c.tag} id={`case-${c.tag}`}>
+            <summary className="group">
+              <span className="case-heading">
+                <span className="eyebrow">
                   {c.tag}
                 </span>
-                <span className="mt-1 block font-mono text-[0.6875rem] text-faint">
+                <span className="text-sm text-muted">
                   {c.org}
                 </span>
               </span>
               <span>
-                <span className="font-display text-xl font-semibold text-ink transition-colors group-hover:text-accent sm:text-2xl">
+                <span className="case-title">
                   {c.title}
                 </span>
-                <span className="mt-1.5 block text-[0.95rem] leading-relaxed text-muted">
+                <span className="mt-2 block max-w-3xl text-base leading-relaxed text-muted">
                   {c.oneLiner}
                 </span>
-                <span className="mt-3 flex flex-wrap gap-x-5 gap-y-1 font-mono text-[0.6875rem] text-faint">
+                <span className="case-metrics">
                   {c.metrics.map((m) => (
                     <span key={m}>{m}</span>
                   ))}
                 </span>
               </span>
               <span
-                className="expand-icon absolute right-4 top-7 font-mono text-lg text-muted sm:static sm:pt-1"
+                className="expand-icon"
                 aria-hidden="true"
               >
                 +

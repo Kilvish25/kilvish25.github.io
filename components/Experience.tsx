@@ -10,7 +10,7 @@ type Entry = {
 
 const ENTRIES: Entry[] = [
   {
-    period: "2025 —",
+    period: "2025 — Present",
     role: "Software Engineer",
     org: "Hillroute Capital · Delhi",
     summary:
@@ -42,11 +42,14 @@ const ENTRIES: Entry[] = [
 
 export default function Experience() {
   return (
-    <section id="experience" className="border-t border-line">
-      <div className="mx-auto max-w-6xl scroll-mt-20 px-5 py-20">
-        <div className="mb-10 flex items-center gap-5">
-          <h2 className="label shrink-0 !text-ink">Experience</h2>
-          <div className="h-px flex-1 bg-line" aria-hidden="true" />
+    <section id="experience" className="section-band border-y border-line">
+      <div className="section-shell py-20">
+        <div className="section-heading">
+          <div>
+            <span className="eyebrow mb-3 block">02 / Experience</span>
+            <h2 className="section-title">From backend to platform.</h2>
+          </div>
+          <a href="/Dharmendra-Ahirwar-Resume.pdf" className="button-secondary">Full résumé <span className="button-meta">PDF</span></a>
         </div>
         <ol className="flex flex-col">
           {ENTRIES.map((e, i) => (
@@ -56,13 +59,13 @@ export default function Experience() {
                 i > 0 ? "border-t border-line" : ""
               }`}
             >
-              <span className="pt-1 font-mono text-xs text-accent">{e.period}</span>
+              <span className="pt-1 text-sm text-accent">{e.period}</span>
               <div>
                 <h3 className="font-display text-xl font-semibold text-ink">
                   {e.role}
                 </h3>
-                <p className="mt-0.5 font-mono text-xs text-muted">{e.org}</p>
-                <p className="mt-3 max-w-3xl text-[0.95rem] leading-relaxed text-muted">
+                <p className="mt-1 text-base text-accent">{e.org}</p>
+                <p className="mt-3 max-w-3xl text-base leading-relaxed text-muted">
                   {e.summary}
                 </p>
                 {e.cases && (

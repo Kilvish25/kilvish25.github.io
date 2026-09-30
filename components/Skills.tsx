@@ -32,21 +32,21 @@ const GROUPS: { label: string; items: string }[] = [
 export default function Skills() {
   return (
     <section id="skills" className="border-t border-line">
-      <div className="mx-auto max-w-6xl scroll-mt-20 px-5 py-20">
-        <div className="mb-10 flex items-center gap-5">
-          <h2 className="label shrink-0 !text-ink">Skills</h2>
-          <div className="h-px flex-1 bg-line" aria-hidden="true" />
+      <div className="section-shell py-20">
+        <div className="section-heading">
+          <div>
+            <span className="eyebrow mb-3 block">03 / Skills</span>
+            <h2 className="section-title">The tools behind the systems.</h2>
+          </div>
         </div>
-        <dl className="flex flex-col">
-          {GROUPS.map((g, i) => (
+        <dl className="skills-grid">
+          {GROUPS.map((g) => (
             <div
               key={g.label}
-              className={`grid gap-2 py-5 sm:grid-cols-[13rem_1fr] sm:gap-6 ${
-                i > 0 ? "border-t border-line" : ""
-              }`}
+              className="skill-group"
             >
-              <dt className="label pt-1">{g.label}</dt>
-              <dd className="text-[0.95rem] leading-relaxed text-ink">
+              <dt className="eyebrow mb-3">{g.label}</dt>
+              <dd className="text-base leading-relaxed text-muted">
                 {g.items}
               </dd>
             </div>

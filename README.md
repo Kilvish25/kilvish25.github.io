@@ -11,6 +11,13 @@ Live at [kilvish25.github.io](https://kilvish25.github.io).
 - Fonts: Archivo (display), IBM Plex Sans (body), IBM Plex Mono (data)
 - No trackers, no analytics, no backend
 
+## Portfolio structure
+
+Recruiter-first overview: introduction and résumé, engineering outcomes, selected
+work, experience, skills, working principles, background, and contact.
+Project summaries stay visible; native expandable sections retain technical depth.
+The metrics are static achievements, not live telemetry.
+
 ## Develop
 
 ```bash

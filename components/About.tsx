@@ -1,13 +1,15 @@
 export default function About() {
   return (
     <section id="about" className="border-t border-line">
-      <div className="mx-auto max-w-6xl scroll-mt-20 px-5 py-20">
-        <div className="mb-10 flex items-center gap-5">
-          <h2 className="label shrink-0 !text-ink">About</h2>
-          <div className="h-px flex-1 bg-line" aria-hidden="true" />
+      <div className="section-shell py-20">
+        <div className="section-heading">
+          <div>
+            <span className="eyebrow mb-3 block">05 / About</span>
+            <h2 className="section-title">A little beyond the code.</h2>
+          </div>
         </div>
-        <div className="grid gap-10 sm:grid-cols-[1fr_auto] sm:gap-16">
-          <div className="max-w-2xl space-y-4 text-[0.95rem] leading-relaxed text-muted">
+        <div className="grid gap-10 lg:grid-cols-[1fr_18rem] lg:gap-16">
+          <div className="max-w-2xl space-y-4 text-base leading-relaxed text-muted">
             <p>
               I&apos;m Dharmendra — Delhi-based, and happiest building systems
               that keep their promises: to users, to the services downstream,
@@ -19,7 +21,7 @@ export default function About() {
               route.
             </p>
           </div>
-          <dl className="flex flex-col gap-3 font-mono text-xs sm:pt-1">
+          <dl className="flex flex-col gap-3 text-sm sm:pt-1">
             <div className="flex gap-3">
               <dt className="text-faint">location</dt>
               <dd className="text-muted">Delhi, India · IST</dd>

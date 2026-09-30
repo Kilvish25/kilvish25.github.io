@@ -1,61 +1,22 @@
-"use client";
-
-import { useEffect, useState } from "react";
-
 const NAV = [
-  { href: "#work", label: "work" },
-  { href: "#experience", label: "experience" },
-  { href: "#skills", label: "skills" },
-  { href: "#contact", label: "contact" },
+  { href: "#work", label: "Work" },
+  { href: "#experience", label: "Experience" },
+  { href: "#skills", label: "Skills" },
+  { href: "#contact", label: "Contact" },
 ];
 
 export default function StatusBar() {
-  const [time, setTime] = useState<string | null>(null);
-
-  useEffect(() => {
-    const tick = () =>
-      setTime(
-        new Intl.DateTimeFormat("en-GB", {
-          hour: "2-digit",
-          minute: "2-digit",
-          second: "2-digit",
-          hour12: false,
-          timeZone: "Asia/Kolkata",
-        }).format(new Date())
-      );
-    tick();
-    const id = setInterval(tick, 1000);
-    return () => clearInterval(id);
-  }, []);
-
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-line bg-bg/85 backdrop-blur">
-      <div className="mx-auto flex h-12 max-w-6xl items-center justify-between gap-4 px-5 font-mono text-xs">
-        <a href="#top" className="text-ink">
-          <span className="hidden font-medium tracking-[0.18em] sm:inline">
-            DHARMENDRA AHIRWAR
-          </span>
-          <span className="whitespace-nowrap font-medium tracking-[0.14em] sm:hidden">
-            D.AHIRWAR
-          </span>
-        </a>
-        <nav className="flex items-center gap-3.5 sm:gap-7">
+    <header className="site-header">
+      <a href="#main" className="skip-link">Skip to content</a>
+      <div className="section-shell header-inner">
+        <a href="#top" className="wordmark" aria-label="Dharmendra Ahirwar, back to top">da<span className="text-accent">.</span></a>
+        <nav aria-label="Main navigation" className="flex flex-wrap items-center gap-x-4 sm:gap-x-8">
           {NAV.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              className="text-muted transition-colors hover:text-accent"
-            >
-              {item.label}
-            </a>
+            <a key={item.href} href={item.href} className="inline-flex min-h-11 items-center text-sm text-muted transition-colors hover:text-accent">{item.label}</a>
           ))}
-          <span
-            className="hidden select-none text-faint md:inline"
-            suppressHydrationWarning
-          >
-            DEL {time ?? "--:--:--"} IST
-          </span>
         </nav>
+        <a href="/Dharmendra-Ahirwar-Resume.pdf" className="header-resume">Résumé <span className="text-faint">PDF</span></a>
       </div>
     </header>
   );

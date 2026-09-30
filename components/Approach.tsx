@@ -38,26 +38,28 @@ const PRINCIPLES: Principle[] = [
 export default function Approach() {
   return (
     <section id="approach" className="border-t border-line">
-      <div className="mx-auto max-w-6xl scroll-mt-20 px-5 py-20">
-        <div className="mb-10 flex items-center gap-5">
-          <h2 className="label shrink-0 !text-ink">How I work</h2>
-          <div className="h-px flex-1 bg-line" aria-hidden="true" />
+      <div className="section-shell py-20">
+        <div className="section-heading">
+          <div>
+            <span className="eyebrow mb-3 block">04 / How I work</span>
+            <h2 className="section-title">Ownership beyond the deploy.</h2>
+          </div>
         </div>
         <dl className="flex flex-col">
           {PRINCIPLES.map((p, i) => (
             <div
               key={p.title}
-              className={`grid gap-3 py-6 sm:grid-cols-[13rem_1fr_auto] sm:gap-6 ${
+              className={`grid gap-3 py-6 lg:grid-cols-[13rem_1fr_13rem] lg:gap-6 ${
                 i > 0 ? "border-t border-line" : ""
               }`}
             >
               <dt className="pt-0.5 font-display text-base font-semibold text-ink">
                 {p.title}
               </dt>
-              <dd className="max-w-2xl text-[0.95rem] leading-relaxed text-muted">
+              <dd className="max-w-2xl text-base leading-relaxed text-muted">
                 {p.text}
               </dd>
-              <dd className="flex flex-wrap items-start gap-2 sm:justify-end">
+              <dd className="flex flex-wrap items-start gap-2 lg:justify-end">
                 {p.evidence.map((e) => (
                   <CaseLink key={e.tag} tag={e.tag}>
                     {e.label}

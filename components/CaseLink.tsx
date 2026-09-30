@@ -16,10 +16,9 @@ export default function CaseLink({
         const el = document.getElementById(`case-${tag}`);
         if (el instanceof HTMLDetailsElement) el.open = true;
       }}
-      className="inline-flex items-center gap-1.5 border border-line px-2.5 py-1 font-mono text-[0.6875rem] text-accent transition-colors hover:border-accent"
+      className="case-link inline-flex min-h-9 items-center border border-line px-3 py-1.5 text-sm text-accent transition-colors hover:border-accent"
     >
-      {children}
-      <span aria-hidden="true">→ {tag}</span>
+      {children ?? tag.replaceAll("-", " ")}
     </a>
   );
 }

@@ -1,11 +1,11 @@
 /* System diagram for the market-data case study. Pure inline SVG in the
    site's palette; accent is reserved for the correctness path. */
 
-const INK = "#e7eaf2";
-const MUTED = "#8a93a6";
-const LINE = "#2a3346";
-const PANEL = "#0d1119";
-const ACCENT = "#a3b577";
+const INK = "#f0f2ec";
+const MUTED = "#b1bab0";
+const LINE = "#343d35";
+const PANEL = "#141915";
+const ACCENT = "#c5de9f";
 
 function Box({
   x,
@@ -62,8 +62,8 @@ function Box({
 
 export default function MarketDataDiagram() {
   return (
-    <div className="overflow-x-auto border border-line bg-panel/60 p-4 sm:p-6">
-      <p className="mb-2 font-mono text-[0.6875rem] text-faint sm:hidden" aria-hidden="true">
+    <div tabIndex={0} role="region" aria-label="Scrollable market-data architecture diagram" className="overflow-x-auto border border-line bg-panel/60 p-4 sm:p-6">
+      <p className="mb-2 font-mono text-xs text-faint lg:hidden" aria-hidden="true">
         scroll →
       </p>
       <svg

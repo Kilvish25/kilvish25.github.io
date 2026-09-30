@@ -9,15 +9,17 @@ import Contact from "@/components/Contact";
 
 export default function Home() {
   return (
-    <main>
+    <>
       <StatusBar />
-      <Hero />
-      <Work />
-      <Approach />
-      <About />
-      <Experience />
-      <Skills />
-      <Contact />
-    </main>
+      <main id="main" tabIndex={-1}>
+        <Hero />
+        <Work />
+        <Experience />
+        <Skills />
+        <Approach />
+        <About />
+        <Contact />
+      </main>
+    </>
   );
 }
